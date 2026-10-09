@@ -12,7 +12,7 @@ const Student = require('./models/Students');
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection
+// MongoDB 
 mongoose
 .connect(process.env.MONGO_URI)
 .then(() => {
@@ -22,12 +22,12 @@ mongoose
     console.error('Error connecting to MongoDB:', error.message);
 });
 
-// Home route
+
 app.get('/', (req, res) => {
     res.send('Server is running');
 });
 
-// READ - Get all students
+// READ 
 app.get('/students', async (req, res) => {
     try {
         const students = await Student.find();
@@ -40,7 +40,7 @@ app.get('/students', async (req, res) => {
     }
 });
 
-// CREATE - Add a student
+// CREATE 
 app.post('/students', async (req, res) => {
     try {
         const student = new Student({
@@ -59,7 +59,7 @@ app.post('/students', async (req, res) => {
     }
 });
 
-// UPDATE - Edit a student
+// UPDATE 
 app.put('/students/:id', async (req, res) => {
     try {
         const student = await Student.findByIdAndUpdate(
@@ -87,7 +87,7 @@ app.put('/students/:id', async (req, res) => {
     }
 });
 
-// DELETE - Remove a student
+// DELETE 
 app.delete('/students/:id', async (req, res) => {
     try {
         const student = await Student.findByIdAndDelete(
@@ -111,7 +111,7 @@ app.delete('/students/:id', async (req, res) => {
     }
 });
 
-// Start server
+
 app.listen(process.env.PORT || 5000, '0.0.0.0', () => {
     console.log(`Server is running on port ${process.env.PORT || 5000}`);
 });
